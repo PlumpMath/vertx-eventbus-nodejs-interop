@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "vertx-eventbus-client": "0.0.4"
+  }
+}
