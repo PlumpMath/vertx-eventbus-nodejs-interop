@@ -1,7 +1,7 @@
 1. Install vertx 2.1.5
 2. Install node 0.10.29
 3. npm install . in directory to install node modules
-4. Make sure clustering is setup and working.  I had issues with multicast on my mac. My sanity check for this was:
+4. Make sure clustering is setup and working.  I had issues with multicast on my mac and decided to just alias my lo0 to 127.0.0.2 and use tcp clustering. My sanity check for this was:
 vertx run VertxServer.java -cluster -cluster-host 127.0.0.1
 vertx run vertx-responder.js -cluster -cluster-host 127.0.0.2
 check netstat to make sure connection exists
