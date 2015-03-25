@@ -17,3 +17,7 @@ node node-responder.js
 9. You will see that VertxEventBusServer.java caught a handleSendOrPub event.
 10. You will see VertxServer.java never gets the response.
 11. curl will be hung waiting for a response.
+
+As per my discussion with Tim Fox ( https://groups.google.com/d/topic/vertx/cfJTy1CwxPY/discussion ), I have updated the code to include a temporary workaround as there will be a fix for this behavior in 2.1.6.
+
+

@@ -14,6 +14,8 @@ import org.vertx.java.platform.Verticle;
 import java.util.HashSet;
 import java.util.Set;
 
+import java.util.UUID;
+
 public class VertxServer extends Verticle {
 
   public void start(){
@@ -22,12 +24,18 @@ public class VertxServer extends Verticle {
     server.requestHandler(new Handler<HttpServerRequest>() {
       public void handle(HttpServerRequest request) {
         System.out.println("A request has arrived on the server!");
-        eb.send("message", new JsonObject(), new Handler<Message<JsonObject>>() {
+	String randUUID = UUID.randomUUID().toString();
+	System.out.println("randUUID: " + randUUID);	
+	eb.registerHandler(randUUID, new Handler<Message<JsonObject>>() {
           public void handle(Message<JsonObject> message) {
-            System.out.println("I received a reply " + message.body());
-            request.response().end();
+            JsonObject resp = message.body();
+	    System.out.println("I received a reply " + resp);
+            request.response().end(resp.toString());
           }
         });
+	JsonObject o = new JsonObject();
+	o.putString("replyUUID",randUUID);
+        eb.send("message", o);
       }
     });
   server.listen(9000, "localhost");

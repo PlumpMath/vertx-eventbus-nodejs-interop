@@ -6,6 +6,6 @@ eb.onopen = function() {
   console.log('eb.onopen start.');
   eb.registerHandler("message",function(message,reply){
     console.log("some-news",message);
-    reply({});
+    eb.send(message.replyUUID,{"status": "resp"});
   });
 }
